@@ -1,0 +1,450 @@
+<!-- <!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Ulang Tahun</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ffeff5, #ffffff);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            overflow: hidden;
+            padding: 20px;
+        }
+        .intro-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d63384;
+            opacity: 0;
+            position: absolute;
+            animation: fadeInOut 4s forwards;
+        }
+        .card-container {
+            position: relative;
+            width: 100%;
+            height: 450px;
+            perspective: 1200px;
+            display: none;
+        }
+        .card-cover, .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            backface-visibility: hidden;
+            transition: transform 0.6s ease-in-out;
+        }
+        .card-cover {
+            background: linear-gradient(135deg, #ff85a2, #ff6384);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+        .card {
+            background: white;
+            transform: rotateY(180deg);
+            padding: 20px;
+            text-align: center;
+            overflow-y: auto; /* Allow vertical scrolling */
+        }
+        .card-container.open .card-cover {
+            transform: rotateY(180deg);
+        }
+        .card-container.open .card {
+            transform: rotateY(0);
+        }
+        .balloon {
+            position: absolute;
+            bottom: 0;
+            width: 30px;
+            height: 40px;
+            background: pink;
+            border-radius: 50%;
+            animation: floatBalloon 5s linear forwards;
+        }
+        .photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            margin: 10px auto;
+            border: 4px solid #ff85a2;
+        }
+        .button {
+            display: inline-block;
+            background: #ff6384;
+            color: white;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s;
+        }
+        .button:hover {
+            transform: scale(1.1);
+        }
+        .location {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #d63384;
+        }
+        iframe {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(-50px); }
+            50% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(50px); }
+        }
+        @keyframes floatBalloon {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(-100vh); opacity: 0; }
+        }
+
+        /* Tampilan untuk HP */
+@media screen and (max-width: 600px) {
+    .card-container {
+        width: 90%;
+        height: auto;
+    }
+    .card {
+        padding: 15px;
+        font-size: 14px;
+    }
+    .card-cover {
+        font-size: 18px;
+    }
+    .photo {
+        width: 80px;
+        height: 80px;
+    }
+    .button {
+        padding: 8px 12px;
+        font-size: 14px;
+    }
+    iframe {
+        height: 150px;
+    }
+}
+
+/* Tampilan untuk Tablet */
+@media screen and (min-width: 601px) and (max-width: 1024px) {
+    .card-container {
+        width: 70%;
+        height: 420px;
+    }
+    .card {
+        font-size: 16px;
+    }
+    .card-cover {
+        font-size: 20px;
+    }
+    .photo {
+        width: 90px;
+        height: 90px;
+    }
+    .button {
+        padding: 10px 14px;
+        font-size: 16px;
+    }
+    iframe {
+        height: 180px;
+    }
+}
+
+/* Tampilan untuk Laptop/Desktop */
+@media screen and (min-width: 1025px) {
+    .card-container {
+        width: 300px;
+        height: 450px;
+    }
+    .card {
+        font-size: 18px;
+    }
+    .card-cover {
+        font-size: 24px;
+    }
+    .photo {
+        width: 100px;
+        height: 100px;
+    }
+    .button {
+        padding: 12px 16px;
+        font-size: 18px;
+    }
+    iframe {
+        height: 200px;
+    }
+}
+
+    </style>
+</head>
+<body>
+    <div id="intro-container"></div>
+    <div class="card-container" id="card-container">
+        <div class="card-cover" onclick="openCard()">Buka Undangan</div>
+        <div class="card">
+            <h1 class="title">Happy Birthday!</h1>
+            <img src="afifa-photo.jpg" class="photo" alt="Afifa Sukma">
+            <p>Afifa Sukma</p>
+            <p>Hitung mundur acara: <span id="countdown"></span></p>
+            <p>Semoga Afifa dan semua tamu mendapat kebahagiaan dan keberkahan.</p>
+            <div class="location">
+                <p>Lokasi Acara: Grand Ballroom, Jakarta</p>
+                <p>Waktu: 17:00 WIB, 25 Desember 2023</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.123456789012!2d106.8451234!3d-6.1234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f1234567890%3A0x1234567890abcdef!2sGrand%20Ballroom%2C%20Jakarta!5e0!3m2!1sen!2sid!4v1631234567890" allowfullscreen></iframe>
+            </div>
+            <a href="https://wa.me/62882017296806?text=Selamat%20Ulang%20Tahun%20Afifa!" class="button">Kirim Ucapan</a>
+            <button class="button" onclick="closeCard()">Tutup</button>
+        </div>
+    </div>
+    <script>
+        const texts = [
+            "Selamat datang di undangan spesial ini!",
+            "Kamu diundang ke acara yang sangat istimewa",
+            "Afifa Sukma akan merayakan ulang tahunnya yang ke-17!"
+        ];
+        const introContainer = document.getElementById("intro-container");
+        let index = 0;
+
+        function showNextText() {
+            if (index < texts.length) {
+                const textElement = document.createElement("div");
+                textElement.classList.add("intro-text");
+                textElement.textContent = texts[index];
+                introContainer.innerHTML = "";
+                introContainer.appendChild(textElement);
+                index++;
+                setTimeout(showNextText, 4000);
+            } else {
+                document.getElementById("card-container").style.display = "block";
+            }
+        }
+
+        showNextText();
+
+        function openCard() {
+            document.getElementById("card-container").classList.add("open");
+            for (let i = 0; i < 10; i++) {
+                let balloon = document.createElement("div");
+                balloon.classList.add("balloon");
+                balloon.style.left = Math.random() * 100 + "%";
+                balloon.style.backgroundColor = `hsl(${Math.random() * 360}, 100%, 50%)`;
+                document.body.appendChild(balloon);
+                setTimeout(() => balloon.remove(), 5000);
+            }
+        }
+
+        function closeCard() {
+            document.getElementById("card-container").classList.remove("open");
+            document.getElementById("card-container").style.display = "none";
+            index = 0;
+            showNextText();
+        }
+
+        // Countdown Timer
+        const countdownElement = document.getElementById("countdown");
+        const eventDate = new Date("2023-12-25T17:00:00").getTime();
+
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+
+            countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownElement.textContent = "Acara Dimulai!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html> -->
+
+
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Ulang Tahun</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <style>
+        body {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #ffeff5, #ffffff);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        
+        .card-container {
+            width: 350px;
+            height: auto;
+            perspective: 1200px;
+            position: relative;
+        }
+        
+        .card-cover, .card {
+            position: absolute;
+            width: 100%;
+            height: auto;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            backface-visibility: hidden;
+            transition: transform 0.6s ease-in-out;
+        }
+        
+        .card-cover {
+            background: linear-gradient(135deg, #ff85a2, #ff6384);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+            padding: 20px;
+        }
+        
+        .card {
+            background: white;
+            transform: rotateY(180deg);
+            padding: 20px;
+            text-align: center;
+            border-radius: 15px;
+        }
+        
+        .card-container.open .card-cover {
+            transform: rotateY(180deg);
+        }
+        .card-container.open .card {
+            transform: rotateY(0);
+        }
+        
+        .photo {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            margin: 15px auto;
+            border: 4px solid #ff85a2;
+        }
+        
+        .button {
+            display: inline-block;
+            background: #ff6384;
+            color: white;
+            padding: 12px 18px;
+            margin-top: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            font-size: 16px;
+            transition: transform 0.3s;
+        }
+        
+        .button:hover {
+            transform: scale(1.1);
+        }
+        
+        .location {
+            margin-top: 15px;
+            font-size: 16px;
+            color: #d63384;
+        }
+        
+        iframe {
+            width: 100%;
+            height: 250px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+        
+        @media screen and (min-width: 1025px) {
+            .card-container {
+                width: 400px;
+            }
+            .card {
+                font-size: 18px;
+            }
+            .photo {
+                width: 130px;
+                height: 130px;
+            }
+            .button {
+                padding: 14px 20px;
+                font-size: 18px;
+            }
+            iframe {
+                height: 300px;
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="card-container" id="card-container">
+        <div class="card-cover" onclick="openCard()">Buka Undangan</div>
+        <div class="card">
+            <h1 class="title">Happy Birthday!</h1>
+            <img src="afifa-photo.jpg" class="photo" alt="Afifa Sukma">
+            <p>Afifa Sukma</p>
+            <p>Hitung mundur acara: <span id="countdown"></span></p>
+            <p>Semoga Afifa dan semua tamu mendapat kebahagiaan dan keberkahan.</p>
+            <div class="location">
+                <p>Lokasi Acara: Grand Ballroom, Jakarta</p>
+                <p>Waktu: 17:00 WIB, 25 Desember 2023</p>
+                <iframe src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3153.123456789012!2d106.8451234!3d-6.1234567!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f1234567890%3A0x1234567890abcdef!2sGrand%20Ballroom%2C%20Jakarta!5e0!3m2!1sen!2sid!4v1631234567890" allowfullscreen></iframe>
+            </div>
+            <a href="https://wa.me/62882017296806?text=Selamat%20Ulang%20Tahun%20Afifa!" class="button">Kirim Ucapan</a>
+            <button class="button" onclick="closeCard()">Tutup</button>
+        </div>
+    </div>
+    <script>
+        function openCard() {
+            document.getElementById("card-container").classList.add("open");
+        }
+
+        function closeCard() {
+            document.getElementById("card-container").classList.remove("open");
+        }
+
+        const countdownElement = document.getElementById("countdown");
+        const eventDate = new Date("2023-12-25T17:00:00").getTime();
+        const countdownInterval = setInterval(() => {
+            const now = new Date().getTime();
+            const distance = eventDate - now;
+            const days = Math.floor(distance / (1000 * 60 * 60 * 24));
+            const hours = Math.floor((distance % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            const minutes = Math.floor((distance % (1000 * 60 * 60)) / (1000 * 60));
+            const seconds = Math.floor((distance % (1000 * 60)) / 1000);
+            countdownElement.textContent = `${days}d ${hours}h ${minutes}m ${seconds}s`;
+            if (distance < 0) {
+                clearInterval(countdownInterval);
+                countdownElement.textContent = "Acara Dimulai!";
+            }
+        }, 1000);
+    </script>
+</body>
+</html>

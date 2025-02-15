@@ -1,0 +1,176 @@
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            border: none;
+        }
+        body {
+            font-family: 'Poppins', sans-serif;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            min-height: 100vh;
+            background: linear-gradient(135deg, #F472B6, #FBCFE8, #FCE7F3);
+            font-family: 'Poppins', sans-serif;
+            text-align: center;
+            padding: 20px;
+        }
+        .balloon {
+            position: absolute;
+            bottom: 0;
+            width: 30px;
+            height: 40px;
+            background: pink;
+            border-radius: 50%;
+            animation: floatBalloon 5s linear forwards;
+        }
+        @keyframes floatBalloon {
+            from { transform: translateY(0); opacity: 1; }
+            to { transform: translateY(-100vh); opacity: 0; }
+        }
+        .con {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            width: 100%;
+            height: 100%;
+        }
+        .intro-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #d63384;
+            opacity: 0;
+            animation: fadeInOut 4s forwards;
+            font-family: 'Dancing Script', cursive;
+        }
+        .card-container {
+            position: relative;
+            width: 80%;
+            height: 450px;
+            perspective: 1200px;
+            display: none;
+        }
+        .card-cover, .card {
+            position: absolute;
+            width: 100%;
+            height: 100%;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.2);
+            backface-visibility: hidden;
+            transition: transform 0.6s ease-in-out;
+        }
+        .card-cover {
+            background: linear-gradient(135deg, #ff85a2, #ff6384);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-size: 24px;
+            font-weight: bold;
+            cursor: pointer;
+        }
+
+
+
+        /* Card styling */
+        .close{
+            display: none;
+        }
+        .open{
+            display: block;
+        }
+        .card {
+            background: white;
+            padding: 20px;
+            text-align: center;
+            overflow-y: auto;
+            border-radius: 15px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Navbar styling */
+        .navbar {
+            font-family: 'Poppins', sans-serif;
+            margin: 20px 0;
+            background-color: #f9f9f9;
+            padding: 10px;
+            border-radius: 8px;
+            box-shadow: 0px 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .navbar ul {
+            list-style: none;
+            display: flex;
+            justify-content: space-around;
+        }
+
+        .navbar-item {
+            text-decoration: none;
+            color: #d63384;
+            font-weight: bold;
+            padding: 8px 15px;
+            transition: background 0.3s ease;
+        }
+
+        .navbar-item:hover {
+            background-color: #ff6384;
+            color: white;
+            border-radius: 4px;
+        }
+
+        /* Section styling */
+        section {
+            margin-top: 20px;
+            padding: 10px;
+            background-color: #f9f9f9;
+            border-radius: 8px;
+            box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.1);
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .photo{
+            height: 50%;
+        }
+
+        /* Location iframe styling */
+        .location iframe {
+            width: 100%;
+            height: 200px;
+            border-radius: 10px;
+            margin-top: 10px;
+        }
+
+        /* Button styling */
+        .button {
+            display: inline-block;
+            background: #ff6384;
+            color: white;
+            padding: 10px 15px;
+            margin-top: 10px;
+            border-radius: 8px;
+            text-decoration: none;
+            transition: transform 0.3s;
+            font-family: 'Poppins', sans-serif;
+        }
+
+        .button:hover {
+            transform: scale(1.1);
+        }
+
+        /* Fade-in-out animation for elements */
+        @keyframes fadeInOut {
+            0% { opacity: 0; transform: translateY(-50px); }
+            50% { opacity: 1; transform: translateY(0); }
+            100% { opacity: 0; transform: translateY(50px); }
+        }
+
+        /* Section visibility */
+        .section {
+            display: none; 
+        }
+
+        #detail-acara, #lokasi, #rsvp, #dress-code, #ucapan {
+            display: none; 
+        }

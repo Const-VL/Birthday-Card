@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Undangan Ulang Tahun</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@400;600&family=Dancing+Script:wght@400;700&display=swap" rel="stylesheet">
+</head>
+<body>
+    <div class="con">
+        <div id="intro-container"></div>
+        <div class="card-container" id="card-container">
+        <div class="card-cover" onclick="openCard()">Buka Undangan</div>
+            
+        <div class="card close" id="card">
+                <h1 class="title">Happy Birthday!</h1>
+                <img src="afifa.png" class="photo" alt="Afifa Sukma">
+                <p>Afifa Sukma</p>
+                <p>Hitung mundur acara: <span id="countdown"></span></p>
+                <p>Semoga Afifa dan semua tamu mendapat kebahagiaan.</p>
+            
+                <nav class="navbar">
+                    <ul>
+                        <li><a href="#detail-acara" class="navbar-item">Detail Acara</a></li>
+                        <li><a href="#lokasi" class="navbar-item">Lokasi</a></li>
+                        <li><a href="#rsvp" class="navbar-item">RSVP</a></li>
+                        <li><a href="#dress-code" class="navbar-item">Dress Code</a></li>
+                        <li><a href="#ucapan" class="navbar-item">Kirim Ucapan</a></li>
+                    </ul>
+                </nav>
+                
+                <!-- Sections -->
+                <section id="detail-acara" class="section">
+                    <h2>Detail Acara</h2>
+                    <p>Waktu: 17:00 WIB, 25 Desember 2023</p>
+                </section>
+                
+                <section id="lokasi" class="section">
+                    <h2>Lokasi</h2>
+                    <p>Grand Ballroom, Jakarta</p>
+                    <iframe src="https://www.google.com/maps/embed?..." allowfullscreen></iframe>
+                </section>
+                
+                <section id="rsvp" class="section">
+                    <h2>RSVP</h2>
+                    <p>Harap konfirmasi kehadiran Anda sebelum tanggal 20 Desember 2023.</p>
+                    <a href="https://wa.me/62882017296806?text=RSVP%20Ulang%20Tahun%20Afifa" class="button">Konfirmasi Kehadiran</a>
+                </section>
+                
+                <section id="dress-code" class="section">
+                    <h2>Dress Code</h2>
+                    <p>Casual Chic - Kenakan pakaian yang nyaman dan modis.</p>
+                </section>
+                
+                <section id="ucapan" class="section">
+                    <h2>Kirim Ucapan</h2>
+                    <a href="https://wa.me/62882017296806?text=Selamat%20Ulang%20Tahun%20Afifa!" class="button">Kirim Ucapan</a>
+                </section>
+                
+        </div>
+    </div>
+    <script src="script.js"></script>
+</body>
+</html>

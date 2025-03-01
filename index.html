@@ -1,0 +1,514 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sweet Seventeen</title>
+</head>
+<style>
+    @import url('https://fonts.googleapis.com/css2?family=Pacifico&family=Poppins:wght@300;400;700&display=swap');
+    /* Reset dasar */
+    * {
+        margin: 0;
+        padding: 0;
+        box-sizing: border-box;
+        font-family: 'Poppins', sans-serif;
+        scroll-behavior: smooth;
+    }
+
+    body {
+        background: linear-gradient(to bottom, #ffccdd, #ffffff);
+        text-align: center;
+        min-height: 100vh;
+        overflow: hidden;
+    }
+
+    /* Header Styling */
+    .header {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .box1 {
+        display: flex;
+        align-items: center;
+        gap: 20px;
+        overflow: hidden;
+    }
+
+    .box1 img {
+        width: 250px;
+        height: auto;
+    }
+
+    @media (max-width: 468px) {
+        .box1 img{
+            width: 100px;
+        }
+        .gaba-cd{
+            display: none;
+        }
+    }
+
+    /* Surat (Amplop) */
+    .card {
+        margin: 20px auto;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        justify-content: center;
+        height: 55vh;
+    }
+
+    .surat img {
+        width: 200px;
+        height: 300px;
+        cursor: pointer;
+        transition: transform 0.3s;
+    }
+
+    .surat img:hover {
+        transform: scale(1.1);
+    }
+
+    /* Tombol */
+    .btn-con {
+        margin-top: 20px;
+    }
+
+    .btn-con button {
+        padding: 10px 20px;
+        font-size: 16px;
+        background-color: #ff66b2;
+        color: white;
+        border: none;
+        border-radius: 5px;
+        cursor: pointer;
+        display: none; /* Sembunyikan sejak awal */
+        transition: background 0.3s;
+    }
+
+    .btn-con button:hover {
+        background-color: #ff3385;
+    }
+
+    /* Balon */
+    .balon {
+        display: flex;
+        justify-content: space-between;
+        margin-top: 30px;
+        position: relative;
+    }
+
+    .box-balon-kiri, .box-balon-kanan {
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+    }
+
+    .balon img {
+        width: 80px;
+        animation: float 3s infinite ease-in-out;
+    }
+
+    .balon-kiri-1 img {
+        animation-delay: 0.5s;
+    }
+
+    .balon-kiri-2 img {
+        animation-delay: 1s;
+    }
+
+    .balon-kanan-1 img {
+        animation-delay: 1.5s;
+    }
+
+    .balon-kanan-2 img {
+        animation-delay: 2s;
+    }
+
+    /* Animasi balon mengambang */
+    @keyframes float {
+        0%, 100% {
+            transform: translateY(0);
+        }
+        50% {
+            transform: translateY(-10px);
+        }
+    }
+
+
+    .card-2 {
+        display: none;
+        flex-direction: column;
+        align-items: center;
+    }
+    .seven {
+        display: none;
+        text-align: center;
+        font-family: 'Pacifico', cursive;
+        color: #ff0077;
+    }
+    .seven h2, .seven h2 span, .seven h4 {
+        opacity: 0;
+        transition: opacity 1s ease-in-out;
+        font-size: 2rem;
+    }
+
+
+
+    .card-3 {
+        display: none;
+        opacity: 0;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    /* Efek transisi saat foto muncul */
+    .profile img {
+        width: 300px;
+        cursor: pointer;
+        transition: all 1s ease-in-out;
+    }
+
+    /* Efek klik pada foto */
+    .profile img.clicked {
+        width: 100px;
+        border-radius: 50%;
+        transition: all 1s ease-in-out;
+    }
+
+    .item-box::-webkit-scrollbar {
+        display: none; 
+    }
+
+    .item-box {
+        display: none;
+        height: 700px;
+        flex-direction: row;  
+        overflow-x: auto;
+        white-space: nowrap; 
+        scroll-snap-type: x mandatory;
+        -ms-overflow-style: none;
+        gap: 20px; 
+        padding: 10px;
+        width: 100%;
+    }
+
+    .item {
+        flex: 0 0 auto;
+        height: 400px;
+        width: 250px; 
+        text-align: center;
+        padding: 20px;
+        background: white;
+        border-radius: 10px;
+        scroll-snap-align: center;
+        opacity: 0.5;
+        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+    }
+
+
+    /* Efek Hover */
+.item:hover {
+    transform: scale(1.05);
+    opacity: 1;
+}
+
+/* Efek ketika item aktif */
+.item.active {
+    opacity: 1;
+    transform: scale(1.1);
+}
+
+/* Styling khusus untuk iframe Google Maps */
+.item iframe {
+    width: 100%;
+    height: 150px;
+    border-radius: 8px;
+}
+
+/* Styling untuk Form RSVP */
+.item.rsvp form {
+    display: flex;
+    flex-direction: column;
+    gap: 10px;
+}
+
+.item.rsvp input,
+.item.rsvp textarea {
+    width: 100%;
+    padding: 8px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+.item.rsvp button,
+.item.item.waktu button {
+    background-color: #ff66b2;
+    color: white;
+    border: none;
+    padding: 10px;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: background 0.3s ease-in-out;
+}
+
+.item.rsvp button:hover, 
+.item.waktu button:hover {
+    background-color: #ff3385;
+}
+
+
+</style>
+<body>
+    <header class="header">
+        <section class="box1">
+            <figure class="gaba">
+                <img src="img/gaba.png" alt="">
+            </figure>
+            <figure class="gaba gaba-cd">
+                <img src="img/gaba.png" alt="">
+            </figure>
+            <figure class="ucapan">
+                <img src="img/ucapan.png" alt="">
+            </figure>
+            <figure class="gaba">
+                <img src="img/gaba.png" alt="">
+            </figure>
+            <figure class="gaba gaba-cd">
+                <img src="img/gaba.png" alt="">
+            </figure>
+        </section>
+    </header>
+    
+    <main class="con">
+        <section class="card card-1">
+            <figure class="surat">
+                <img src="img/amplop.png" alt="" id="amplop" onclick="gantiGambar()">
+                <audio src="music/katty-perry.mp3" id="lagu"></audio>
+            </figure>
+            <div class="btn-con">
+                <button id="btnBaca">Baca Lebih Lanjut</button>
+            </div>
+        </section>
+        <section class="card card-2">
+            <figure class="cake">
+                <img src="img/cake.png" alt="" id="cake">
+                <figcaption>Klik 3x</figcaption>
+            </figure>
+            <div class="seven">
+                <h2>1<span>7<sup>th</sup></span></h2>
+                <h4>Sweet Seventeen Afifa</h4>
+            </div>
+        </section>
+        <section class="card card-3">
+            <figure class="profile">
+                <img src="img/afifa.jpg" alt="">
+                <figcaption>Click Me!</figcaption>
+            </figure>
+            <div class="item-box" id="waktuAcara">
+                <div class="item waktu">
+                    <h3>Waktu Acara</h3>
+                    <p>5 Maret 2025</p>
+                    <p>Pukul 17:00 WIB - Selesai</p>
+                    <p class="timer">Menghitung...</p> 
+                    <button onclick="aturAlarm()">Ingatkan Saya</button>
+                </div>
+                <div class="item lokasi">
+                    <h3>Lokasi</h3>
+                    <p>Grand Ballroom, Jakarta</p>
+                    <iframe src="https://www.google.com/maps/embed?..." allowfullscreen></iframe>
+                </div>
+                <div class="item baju">
+                    <h3>Dress Code</h3>
+                </div>
+                <div class="item rsvp">
+                    <h3>RSVP</h3>
+                    <form onsubmit="kirimWA(event)">
+                        <input type="text" name="nama" id="nama" placeholder="nama">
+                        <textarea name="pesam" id="pesan" placeholder="pesan"></textarea>
+                        <button>Kirim</button>
+                    </form>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <section class="balon">
+        <div class="box-balon-kiri">
+            <figure class="balon balon-kiri-1">
+                <img src="img/balon.png" alt="">
+            </figure>
+        </div>
+        <div class="box-balon-kanan">
+            <figure class="balon balon-kanan-1">
+                <img src="img/balon.png" alt="">
+            </figure>
+        </div>
+    </section>
+
+    <script>
+        let laguDimainkan = false; 
+        
+        function gantiGambar() {
+            var img = document.getElementById("amplop");
+            var audio = document.getElementById("lagu");
+            var btnBaca = document.getElementById("btnBaca");
+
+            if (!laguDimainkan) { 
+                audio.play();
+                laguDimainkan = true; 
+            }
+
+            if (img.src.includes("amplop.png")) {
+                img.src = "img/amplop2.png"; 
+            } else if (img.src.includes("amplop2.png")) {
+                img.src = "img/surat.png"; 
+            } else {
+                img.src = "img/amplop.png";
+            }
+
+            // Cek jika gambar sudah berubah menjadi "surat", maka tombol tampil
+            if (img.src.includes("surat.png")) {
+                btnBaca.style.display = "block"; // Menampilkan tombol
+            } else {
+                btnBaca.style.display = "none"; // Menyembunyikan jika kembali ke gambar sebelumnya
+            }
+        }
+
+
+        let klikKue = 0;
+
+    document.getElementById("btnBaca").addEventListener("click", function() {
+        document.querySelector(".card-1").style.display = "none";
+        document.querySelector(".card-2").style.display = "flex";
+    });
+
+    document.getElementById("cake").addEventListener("click", function() {
+        klikKue++;
+        if (klikKue === 3) {
+            document.querySelector(".cake").style.display = "none";
+            tampilkanSeven();
+        }
+    });
+
+    function tampilkanSeven() {
+        let sevenContainer = document.querySelector(".seven");
+        let h2 = sevenContainer.querySelector("h2");
+        let span = h2.querySelector("span");
+        let h4 = sevenContainer.querySelector("h4");
+
+        sevenContainer.style.display = "block";
+        h2.style.opacity = "1";
+        
+        setTimeout(() => {
+            span.style.opacity = "1";
+        }, 1000);
+        
+        setTimeout(() => {
+            h4.style.opacity = "1";
+        }, 2000);
+
+           
+        setTimeout(() => {
+            document.querySelector(".card-2").style.opacity = "0";
+
+            setTimeout(() => {
+                document.querySelector(".card-2").style.display = "none";
+                document.querySelector(".card-3").style.display = "flex";
+                setTimeout(() => {
+                    document.querySelector(".card-3").style.opacity = "1";
+                }, 100);
+            }, 1000);
+        }, 5000);
+    }
+
+
+
+    // Efek klik pada gambar
+    document.querySelector(".profile img").addEventListener("click", function () {
+        this.classList.add("clicked");
+
+        // Setelah 1 detik, munculkan item box
+        document.querySelector(".profile figcaption").style.display = 'none';
+        setTimeout(() => {
+            document.querySelector(".item-box").style.display = 'flex';
+        }, 1000);
+    });
+
+
+    function kirimWA(event) {
+        event.preventDefault(); // Mencegah reload halaman
+
+        let nama = document.getElementById("nama").value;
+        let pesan = document.getElementById("pesan").value;
+        let nomorWA = "6283182132928"; // Nomor tujuan (tanpa +)
+
+        // Format pesan yang akan dikirim
+        let teksPesan = `Selamat%20Ulang%20Tahun%20Afifa%20Dari%20\n%20${encodeURIComponent(nama)}\n%20"${encodeURIComponent(pesan)}%20`;
+
+        // Buat link WhatsApp dengan `wa.me`
+        let url = `https://wa.me/${nomorWA}?text=${teksPesan}`;
+
+        // Buka WhatsApp dengan URL yang dibuat
+        window.location.href = url;
+    }
+
+
+
+    let acaraWaktu = new Date("March 5, 2025 17:00:00").getTime();
+    let alarmAktif = false; 
+    let notifCounter = 0; // Hitungan notifikasi
+
+    function updateTimer() {
+        let sekarang = new Date().getTime();
+        let sisaWaktu = acaraWaktu - sekarang;
+
+        let hari = Math.floor(sisaWaktu / (1000 * 60 * 60 * 24));
+        let jam = Math.floor((sisaWaktu % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+        let menit = Math.floor((sisaWaktu % (1000 * 60 * 60)) / (1000 * 60));
+        let detik = Math.floor((sisaWaktu % (1000 * 60)) / 1000);
+
+        if (sisaWaktu > 0) {
+            document.querySelector(".timer").innerHTML = `${hari}h ${jam}j ${menit}m ${detik}d`;
+        } else {
+            document.querySelector(".timer").innerHTML = "Acara telah dimulai!";
+            if (alarmAktif && notifCounter < 2) {
+                tampilkanNotifikasi();
+                notifCounter++; 
+            }
+        }
+    }
+
+    setInterval(updateTimer, 1000);
+    updateTimer();
+
+    function aturAlarm() {
+        if (!("Notification" in window)) {
+            alert("Browser tidak mendukung notifikasi!");
+        } else {
+            Notification.requestPermission().then((permission) => {
+                if (permission === "granted") {
+                    alarmAktif = true;
+                    alert("Alarm diatur! Anda akan mendapat notifikasi saat acara dimulai.");
+                } else {
+                    alert("Izinkan notifikasi agar alarm berfungsi.");
+                }
+            });
+        }
+    }
+
+    function tampilkanNotifikasi() {
+        if (notifCounter < 2) {
+            new Notification("Pengingat Acara!", {
+                body: "Acara telah dimulai! Segera bergabung!",
+                icon: "https://cdn-icons-png.flaticon.com/512/1828/1828817.png"
+            });
+        }
+    }
+
+    </script>
+</body>
+</html>

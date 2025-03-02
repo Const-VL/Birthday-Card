@@ -17,7 +17,7 @@
     }
 
     body {
-        background: linear-gradient(to bottom, #ffccdd, #ffffff);
+        background: linear-gradient(to bottom, #ffccdd, #fcd4d4);
         text-align: center;
         min-height: 100vh;
     }
@@ -187,26 +187,27 @@
 
     /* Styling untuk video */
     .vidio {
-        display: none; /* Sembunyikan video secara default */
-        width: 100%; /* Membuat video responsive */
-        height: auto; /* Menyesuaikan tinggi video sesuai lebar */
-        border-radius: 10px; /* Memberikan sudut melengkung pada video */
-        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); /* Menambahkan efek bayangan */
-        transition: transform 0.3s ease-in-out; /* Efek transisi saat video muncul */
+        display: none; 
+        width: 95%; 
+        height: auto; 
+        border-radius: 10px; 
+        box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2); 
+        transition: transform 0.3s ease-in-out; 
     }
 
     /* Efek ketika video ditampilkan */
     .vidio.show {
-        display: block; /* Menampilkan video */
-        transform: scale(1.05); /* Efek zoom sedikit ketika video muncul */
+        display: block;
+        transform: scale(1.05); 
     }
 
     /* Styling untuk video ketika diputar */
     .vidio video {
-        width: 100%; /* Mengisi lebar kontainer */
-        height: auto; /* Menjaga rasio aspek video */
-        border-radius: 8px; /* Memberikan border radius pada video */
+        width: 100%; 
+        height: auto; 
+        border-radius: 8px solid pink; 
         opacity: 1;
+        cursor: pointer;
     }
 
     .item-box::-webkit-scrollbar {
@@ -225,68 +226,139 @@
         width: 100%;
     }
 
+    /* Styling dasar untuk .item */
     .item {
         flex: 0 0 auto;
-        width: 250px; 
-        flex-wrap: wrap;
-        text-wrap: wrap;
-        text-align: center;
+        width: 250px;
         padding: 20px;
-        background: white;
-        border-radius: 10px;
-        scroll-snap-align: center;
-        opacity: 0.5;
-        transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+        background: #fff;
+        border-radius: 15px;
+        text-align: center;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1); /* Efek bayangan halus */
+        transition: transform 0.3s ease, opacity 0.3s ease, box-shadow 0.3s ease; /* Efek transisi */
+        opacity: 0.8;
+        position: relative;
+        overflow: hidden;
+        margin: 10px;
     }
-
 
     /* Efek Hover */
     .item:hover {
-        transform: scale(1.05);
+        transform: scale(1.05); /* Membesarkan elemen saat hover */
         opacity: 1;
+        box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15); /* Efek bayangan lebih kuat saat hover */
     }
 
-    /* Efek ketika item aktif */
+    /* Efek item aktif */
     .item.active {
         opacity: 1;
-        transform: scale(1.1);
+        transform: scale(1.1); /* Membesarkan lebih besar saat aktif */
+        box-shadow: 0 12px 35px rgba(0, 0, 0, 0.2); /* Efek bayangan kuat saat aktif */
     }
 
-    /* Styling khusus untuk iframe Google Maps */
+    /* Styling untuk iframe Google Maps */
     .item iframe {
         width: 100%;
-        height: 150px;
-        border-radius: 8px;
+        height: 200px; /* Lebar dan tinggi iframe lebih besar */
+        border-radius: 10px;
+        transition: transform 0.3s ease; /* Efek transisi saat hover */
     }
 
-    /* Styling untuk Form RSVP */
+    .item iframe:hover {
+        transform: scale(1.05); /* Zoom sedikit saat hover */
+    }
+
+    /* Styling untuk judul dan teks */
+    .item h3 {
+        font-size: 1.2rem;
+        font-weight: 700;
+        color: #333;
+        margin-bottom: 10px;
+        transition: color 0.3s ease;
+    }
+
+    .item h3:hover {
+        color: #ff66b2; /* Ubah warna judul saat hover */
+    }
+
+    /* Styling untuk form RSVP */
     .item.rsvp form {
         display: flex;
         flex-direction: column;
-        gap: 10px;
+        gap: 15px;
+        align-items: center;
+        margin-top: 20px;
     }
 
+    /* Input dan textarea */
     .item.rsvp input,
     .item.rsvp textarea {
-        width: 100%;
-        padding: 8px;
-        border: 1px solid #ccc;
-        border-radius: 5px;
+        width: 80%;
+        padding: 12px;
+        border: 2px solid #ccc;
+        border-radius: 8px;
+        font-size: 1rem;
+        transition: border-color 0.3s ease;
     }
 
-    .item.rsvp button{
+    .item.rsvp input:focus,
+    .item.rsvp textarea:focus {
+        border-color: #ff66b2; /* Ubah border saat fokus */
+    }
+
+    /* Styling untuk tombol Kirim */
+    .item.rsvp button {
         background-color: #ff66b2;
         color: white;
         border: none;
-        padding: 10px;
-        border-radius: 5px;
+        padding: 12px 30px;
+        font-size: 1rem;
+        border-radius: 8px;
         cursor: pointer;
-        transition: background 0.3s ease-in-out;
+        transition: background-color 0.3s ease, transform 0.2s ease;
     }
 
-    .item.rsvp button:hover{
-        background-color: #ff3385;
+    .item.rsvp button:hover {
+        background-color: #ff3385; /* Ubah warna tombol saat hover */
+        transform: scale(1.1); /* Efek membesar pada tombol saat hover */
     }
+
+    /* Styling untuk timer */
+    .item .timer {
+        font-size: 1rem;
+        color: #ff66b2;
+        font-weight: 600;
+        margin-top: 10px;
+    }
+
+    /* Responsif - Mengubah lebar item pada layar kecil */
+    @media (max-width: 768px) {
+        .item {
+            width: 100%;
+            margin: 10px 0; /* Mengurangi jarak antar item */
+        }
+
+        .item iframe {
+            height: 180px; /* Mengurangi tinggi iframe */
+        }
+    }
+
+    /* Efek animasi pada saat item pertama kali muncul */
+    @keyframes fadeIn {
+        0% {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+        100% {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .item {
+        animation: fadeIn 0.6s ease-out; /* Animasi saat item pertama kali muncul */
+    }
+
 
 
 </style>

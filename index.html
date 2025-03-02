@@ -277,7 +277,7 @@
         transition: color 0.3s ease;
     }
 
-    .item h3:hover {
+    .item:hover h3{
         color: #ff66b2; /* Ubah warna judul saat hover */
     }
 
@@ -359,6 +359,35 @@
         animation: fadeIn 0.6s ease-out; /* Animasi saat item pertama kali muncul */
     }
 
+    /* Animasi untuk emoji bergerak dari bawah ke atas */
+    @keyframes moveUp {
+        0% {
+            bottom: -50px; /* Mulai dari bawah */
+            opacity: 1;
+        }
+        100% {
+            bottom: 90vh; /* Berhenti di posisi 90vh dari atas */
+            opacity: 0; /* Menghilang */
+        }
+    }
+
+    /* Styling untuk emoji hati */
+    .emoji-hati {
+        position: absolute;
+        bottom: -50px; 
+        font-size: 2rem;
+        animation: moveUp 3s ease-in forwards; 
+        opacity: 0;
+    }
+
+    /* Styling untuk angka 17 */
+    .angka-17 {
+        position: absolute;
+        bottom: 0;
+        font-size: 3rem;
+        animation: moveUp 3s ease-in-out forwards;
+        color: #ff66b2;
+    }
 
 
 </style>
@@ -483,162 +512,225 @@
 
         let klikKue = 0;
 
-    document.getElementById("btnBaca").addEventListener("click", function() {
-        document.querySelector(".card-1").style.display = "none";
-        document.querySelector(".card-2").style.display = "flex";
-    });
+        document.getElementById("btnBaca").addEventListener("click", function() {
+            document.querySelector(".card-1").style.display = "none";
+            document.querySelector(".card-2").style.display = "flex";
+        });
 
-    document.getElementById("cake").addEventListener("click", function() {
-        klikKue++;
-        if (klikKue === 3) {
-            document.querySelector(".cake").style.display = "none";
-            tampilkanSeven();
-        }
-    });
+        document.getElementById("cake").addEventListener("click", function() {
+            klikKue++;
+            let cake = document.getElementById("cake");
 
-    function tampilkanSeven() {
-        let sevenContainer = document.querySelector(".seven");
-        let h2 = sevenContainer.querySelector("h2");
-        let span = h2.querySelector("span");
-        let h4 = sevenContainer.querySelector("h4");
+            // Mengurangi opacity saat pertama kali klik
+            cake.style.opacity = "0.5";
 
-        sevenContainer.style.display = "block";
-        h2.style.opacity = "1";
-        
-        setTimeout(() => {
-            span.style.opacity = "1";
-        }, 1000);
-        
-        setTimeout(() => {
-            h4.style.opacity = "1";
-        }, 2000);
+            if (klikKue === 1) {
+                // Menampilkan emoji hati saat klik pertama kali
+                tampilkanEmojiHati();
+            } else if (klikKue === 2) {
+                // Menampilkan angka 17 saat klik kedua kali
+                tampilkanAngka17();
+            } else {
+                document.querySelector(".cake").style.display = "none";
+                tampilkanSeven();
+            }
+        });
 
-           
-        setTimeout(() => {
-            document.querySelector(".card-2").style.opacity = "0";
+        function tampilkanEmojiHati() {
+        let emojiCount = 10; // Total emoji yang akan ditampilkan
+        let delay = 0; // Delay awal untuk emoji pertama
 
+        for (let i = 0; i < emojiCount; i++) {
+            let emojiHati = document.createElement("div");
+            emojiHati.classList.add("emoji-hati");
+            emojiHati.innerHTML = "❤️"; // Emoji hati
+            emojiHati.style.left = `${Math.random() * 100}%`; // Posisi acak di sumbu X
+
+            // Menampilkan emoji dengan delay
             setTimeout(() => {
-                document.querySelector(".card-2").style.display = "none";
-                document.querySelector(".card-3").style.display = "flex";
+                document.body.appendChild(emojiHati);
+
+                // Menghapus emoji setelah animasi selesai
                 setTimeout(() => {
-                    document.querySelector(".card-3").style.opacity = "1";
-                }, 100);
-            }, 1000);
-        }, 5000);
-    }
+                    emojiHati.remove();
+                }, 3000); // Durasi animasi 3 detik
+            }, delay);
 
-
-
-    // Efek klik pada gambar
-    document.querySelector(".profile img").addEventListener("click", function () {
-        var audio = document.getElementById("lagu");
-        var vidio = document.getElementById("vidio");
-
-
-        this.classList.add("clicked");
-
-        if (laguDimainkan) { 
-                audio.pause();
-                laguDimainkan = false; 
+            // Tambahkan delay untuk emoji berikutnya
+            delay += 500; // Setiap emoji muncul dengan jeda 0.5 detik
         }
+    }        
 
-        if(!vidioDimainkan){
-            vidio.play();
-            vidioDimainkan = true;
-        } else{
-            vidio.pause();
-            vidioDimainkan = false;
-        }
+        // Fungsi untuk menampilkan angka 17
+        function tampilkanAngka17() {
+            let angkaCount = 10; // Total angka yang akan ditampilkan
+            let delay = 0; // Delay awal untuk angka pertama
 
-        // Setelah 1 detik, munculkan item box
-        document.querySelector(".profile figcaption").style.display = 'none';
-        setTimeout(() => {
-            document.querySelector(".item-box").style.display = 'flex';
-            document.querySelector(".vidio").style.display = 'block';
-        }, 1000);
-    });
+            for (let i = 0; i < angkaCount; i++) {
+                let angka17 = document.createElement("div");
+                angka17.classList.add("angka-17");
+                angka17.innerHTML = "17"; // Angka 17
+                angka17.style.left = `${Math.random() * 100}%`; // Posisi acak di sumbu X
 
-    //efekKlik pada vidio
-    document.querySelector('.vidio').addEventListener("click", function (){
-        if(!vidioDimainkan){
-            vidio.play();
-            vidioDimainkan = true;
-        } else{
-            vidio.pause();
-            vidioDimainkan = false;
-        }
-    })
+                // Menampilkan angka dengan delay
+                setTimeout(() => {
+                    document.body.appendChild(angka17);
 
+                    // Menghapus angka setelah animasi selesai
+                    setTimeout(() => {
+                        angka17.remove();
+                    }, 3000); // Durasi animasi 3 detik
+                }, delay);
 
-    function kirimWA(event) {
-        event.preventDefault(); // Mencegah reload halaman
-
-        let nama = document.getElementById("nama").value;
-        let pesan = document.getElementById("pesan").value;
-        let nomorWA = "6283182132928"; // Nomor tujuan (tanpa +)
-
-        // Format pesan yang akan dikirim
-        let teksPesan = `Selamat%20Ulang%20Tahun%20Afifa%20Dari%20\n%20${encodeURIComponent(nama)}\n%20"${encodeURIComponent(pesan)}%20`;
-
-        // Buat link WhatsApp dengan `wa.me`
-        let url = `https://wa.me/${nomorWA}?text=${teksPesan}`;
-
-        // Buka WhatsApp dengan URL yang dibuat
-        window.location.href = url;
-    }
-
-
-
-    let acaraWaktu = new Date("March 5, 2025 18:00:00").getTime();
-    let alarmAktif = false; 
-    let notifCounter = 0; // Hitungan notifikasi
-
-    function updateTimer() {
-        let sekarang = new Date().getTime();
-        let sisaWaktu = acaraWaktu - sekarang;
-
-        let hari = Math.floor(sisaWaktu / (1000 * 60 * 60 * 24));
-        let jam = Math.floor((sisaWaktu % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
-        let menit = Math.floor((sisaWaktu % (1000 * 60 * 60)) / (1000 * 60));
-        let detik = Math.floor((sisaWaktu % (1000 * 60)) / 1000);
-
-        if (sisaWaktu > 0) {
-            document.querySelector(".timer").innerHTML = `${hari}h ${jam}j ${menit}m ${detik}d`;
-        } else {
-            document.querySelector(".timer").innerHTML = "Acara telah dimulai!";
-            if (alarmAktif && notifCounter < 2) {
-                tampilkanNotifikasi();
-                notifCounter++; 
+                // Tambahkan delay untuk angka berikutnya
+                delay += 500; // Setiap angka muncul dengan jeda 0.5 detik
             }
         }
-    }
 
-    setInterval(updateTimer, 1000);
-    updateTimer();
 
-    // function aturAlarm() {
-    //     if (!("Notification" in window)) {
-    //         alert("Browser tidak mendukung notifikasi!");
-    //     } else {
-    //         Notification.requestPermission().then((permission) => {
-    //             if (permission === "granted") {
-    //                 alarmAktif = true;
-    //                 alert("Alarm diatur! Anda akan mendapat notifikasi saat acara dimulai.");
-    //             } else {
-    //                 alert("Izinkan notifikasi agar alarm berfungsi.");
-    //             }
-    //         });
-    //     }
-    // }
+        function tampilkanSeven() {
+            let sevenContainer = document.querySelector(".seven");
+            let h2 = sevenContainer.querySelector("h2");
+            let span = h2.querySelector("span");
+            let h4 = sevenContainer.querySelector("h4");
 
-    // function tampilkanNotifikasi() {
-    //     if (notifCounter < 2) {
-    //         new Notification("Pengingat Acara!", {
-    //             body: "Acara telah dimulai! Segera bergabung!",
-    //             icon: "https://cdn-icons-png.flaticon.com/512/1828/1828817.png"
-    //         });
-    //     }
-    // }
+            sevenContainer.style.display = "block";
+            h2.style.opacity = "1";
+            
+            setTimeout(() => {
+                span.style.opacity = "1";
+            }, 1000);
+            
+            setTimeout(() => {
+                h4.style.opacity = "1";
+            }, 2000);
+
+            
+            setTimeout(() => {
+                document.querySelector(".card-2").style.opacity = "0";
+
+                setTimeout(() => {
+                    document.querySelector(".card-2").style.display = "none";
+                    document.querySelector(".card-3").style.display = "flex";
+                    setTimeout(() => {
+                        document.querySelector(".card-3").style.opacity = "1";
+                    }, 100);
+                }, 1000);
+            }, 5000);
+        }
+
+
+
+        // Efek klik pada gambar
+        document.querySelector(".profile img").addEventListener("click", function () {
+            var audio = document.getElementById("lagu");
+            var vidio = document.getElementById("vidio");
+
+
+            this.classList.add("clicked");
+
+            if (laguDimainkan) { 
+                    audio.pause();
+                    laguDimainkan = false; 
+            }
+
+            if(!vidioDimainkan){
+                vidio.play();
+                vidioDimainkan = true;
+            } else{
+                vidio.pause();
+                vidioDimainkan = false;
+            }
+
+            // Setelah 1 detik, munculkan item box
+            document.querySelector(".profile figcaption").style.display = 'none';
+            setTimeout(() => {
+                document.querySelector(".item-box").style.display = 'flex';
+                document.querySelector(".vidio").style.display = 'block';
+            }, 1000);
+        });
+
+        //efekKlik pada vidio
+        document.querySelector('.vidio').addEventListener("click", function (){
+            if(!vidioDimainkan){
+                vidio.play();
+                vidioDimainkan = true;
+            } else{
+                vidio.pause();
+                vidioDimainkan = false;
+            }
+        })
+
+
+        function kirimWA(event) {
+            event.preventDefault(); // Mencegah reload halaman
+
+            let nama = document.getElementById("nama").value;
+            let pesan = document.getElementById("pesan").value;
+            let nomorWA = "6283182132928"; // Nomor tujuan (tanpa +)
+
+            // Format pesan yang akan dikirim
+            let teksPesan = `Selamat%20Ulang%20Tahun%20Afifa%20Dari%20\n%20${encodeURIComponent(nama)}\n%20"${encodeURIComponent(pesan)}%20`;
+
+            // Buat link WhatsApp dengan `wa.me`
+            let url = `https://wa.me/${nomorWA}?text=${teksPesan}`;
+
+            // Buka WhatsApp dengan URL yang dibuat
+            window.location.href = url;
+        }
+
+
+
+        let acaraWaktu = new Date("March 5, 2025 18:00:00").getTime();
+        let alarmAktif = false; 
+        let notifCounter = 0; // Hitungan notifikasi
+
+        function updateTimer() {
+            let sekarang = new Date().getTime();
+            let sisaWaktu = acaraWaktu - sekarang;
+
+            let hari = Math.floor(sisaWaktu / (1000 * 60 * 60 * 24));
+            let jam = Math.floor((sisaWaktu % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            let menit = Math.floor((sisaWaktu % (1000 * 60 * 60)) / (1000 * 60));
+            let detik = Math.floor((sisaWaktu % (1000 * 60)) / 1000);
+
+            if (sisaWaktu > 0) {
+                document.querySelector(".timer").innerHTML = `${hari}h ${jam}j ${menit}m ${detik}d`;
+            } else {
+                document.querySelector(".timer").innerHTML = "Acara telah dimulai!";
+                if (alarmAktif && notifCounter < 2) {
+                    tampilkanNotifikasi();
+                    notifCounter++; 
+                }
+            }
+        }
+
+        setInterval(updateTimer, 1000);
+        updateTimer();
+
+        // function aturAlarm() {
+        //     if (!("Notification" in window)) {
+        //         alert("Browser tidak mendukung notifikasi!");
+        //     } else {
+        //         Notification.requestPermission().then((permission) => {
+        //             if (permission === "granted") {
+        //                 alarmAktif = true;
+        //                 alert("Alarm diatur! Anda akan mendapat notifikasi saat acara dimulai.");
+        //             } else {
+        //                 alert("Izinkan notifikasi agar alarm berfungsi.");
+        //             }
+        //         });
+        //     }
+        // }
+
+        // function tampilkanNotifikasi() {
+        //     if (notifCounter < 2) {
+        //         new Notification("Pengingat Acara!", {
+        //             body: "Acara telah dimulai! Segera bergabung!",
+        //             icon: "https://cdn-icons-png.flaticon.com/512/1828/1828817.png"
+        //         });
+        //     }
+        // }
 
     </script>
 </body>
